@@ -144,27 +144,28 @@
 				<div class="container">
 						<div class="registration-steps-page-container">
 							
-	  					 <form class="registration-steps-form">
+	  					 <form method = "post" class="registration-steps-form">
 							 
 							 <div class="registration-social-login-container">
 
     	  						 <div class="form-group">
-    								 <label for="full-name" class="col-form-label">Full Name</label>
-    	  							 <input type="text" class="form-control" id="full-name" placeholder="John Doe">
+    								 <label for="register_username" class="col-form-label">Username</label>
+    	  							 <!--<input type="text" class="form-control" id="full-name" placeholder="John Doe">-->
+									 <input type="text" class="form-control" id="register_username" placeholder="John Doe">
     	  						 </div>
     	  						 <div class="form-group">
-    								 <label for="email" class="col-form-label">Email</label>
-    	  							 <input type="text" class="form-control" id="email" placeholder="jondoe@gmail.com">
+    								 <label for="register_email" class="col-form-label">Email</label>
+    	  							 <input type="text" class="form-control" id="register_email" placeholder="jondoe@gmail.com">
     	  						 </div>
     	  						 <div class="form-group">
     								 <div class="row">
     									<div class="col">
-    	  								 <label for="password" class="col-form-label">Password</label>
-    	  	  							 <input type="password" class="form-control" id="password" placeholder="&middot;&middot;&middot;&middot;&middot;&middot;">
+    	  								 <label for="register_password" class="col-form-label">Password</label>
+    	  	  							 <input type="password" class="form-control" id="register_password"  placeholder="&middot;&middot;&middot;&middot;&middot;&middot;" required onchange = "ValidatePassword();"/>
     									</div>
     									<div class="col">
-    	  								 <label for="confirm-password" class="col-form-label">&nbsp;</label>
-    	  	  							 <input type="password" class="form-control" id="confirm-password" placeholder="Confirm Password">
+    	  								 <label for="register_confirm_password" class="col-form-label">&nbsp;</label>
+    	  	  							 <input type="password" class="form-control" id="register_confirm_password"  placeholder="Confirm Password" required onchange = "ValidatePassword();"/>
     									</div>
     								 </div>
     	  						 </div>
@@ -182,8 +183,8 @@
 							 
 							 <div class="clearfix"></div>
 	  						 <div class="form-group last-form-group-continue">
-	  							 <a href="signup-step3.html" class="btn btn-green-pro">Continue</a>
-								 <span class="checkbox-remember-pro"><input type="checkbox" id="checkbox-terms"><label for="checkbox-terms" class="col-form-label">By clicking "Continue", you agree to our <a href="#!">Terms of Use</a> and 
+	  							 <button class="btn btn-green-pro" onclick = "VerifyRegister();" id="register_button">Continue</button>
+								 <span class="checkbox-remember-pro"><input type="checkbox" id="checkbox-terms" checked><label for="checkbox-terms" class="col-form-label">By clicking "Continue", you agree to our <a href="#!">Terms of Use</a> and
 <a href="#!">Privacy Policy</a> including the use of cookies.</label></span>
 								 <div class="clearfix"></div>
 	  						 </div>
@@ -233,10 +234,10 @@
 					 <div class="registration-social-login-container">
 						 <form>
 							 <div class="form-group">
-								 <input type="text" class="form-control" id="username" placeholder="Username">
+								 <input type="text" class="form-control" id="login_username" placeholder="Username">
 							 </div>
 							 <div class="form-group">
-								 <input type="password" class="form-control" id="password" placeholder="Password">
+								 <input type="password" class="form-control" id="login_password" placeholder="Password">
 							 </div>
 							 <div class="form-group">
 								 <button type="button" class="btn btn-green-pro btn-display-block">Sign In</button>
@@ -282,6 +283,59 @@
 		<script src="js/navigation.js" defer></script><!-- Header Navigation JS -->
 		<script src="js/jquery.flexslider-min.js" defer></script><!-- Custom Document Ready JS -->		
 		<script src="js/script.js" defer></script><!-- Custom Document Ready JS -->
+
+	<script>
+		function ValidatePassword(){
+			register_password = document.getElementById('register_password').value;
+			register_confirm_password = document.getElementById('register_confirm_password').value;
+			register_button = document.getElementById('register_button');
+
+			if(register_password != register_confirm_password){
+				register_button.disabled = "true";
+				// document.getElementById('registration_result').innerHTML = "password does not match";
+			} else {
+				register_button.disabled = "false";
+				// document.getElementById('registration_result').innerHTML = "password match";
+			}
+		}
+
+		function VerifyRegister(){
+
+			register_email = document.getElementById('register_email').value;
+			register_password = document.getElementById('register_password').value;
+			register_confirm_password = document.getElementById('register_confirm_password').value;
+
+			if( register_password != register_confirm_password ){
+
+				alert('Your password does not match');
+
+			} else {
+
+				var url = "http://localhost:3000/api/users";
+
+				var data = {};
+				data.email = register_email;
+				data.password = register_password;
+				var json = JSON.stringify(data);
+
+				var xhr = new XMLHttpRequest();
+				xhr.open('POST', url, true);
+				xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
+				xhr.onload = function() {
+					console.log(xhr.responseText);
+
+					var respond = JSON.parse(xhr.responseText);
+					if (xhr.readyState == 4 && xhr.status == "200") {
+						alert("You have been successfully registered. You can now login.");
+					} else {
+						console.error(respond);
+						alert(respond.message);
+					}
+				}
+				xhr.send(json);
+			}
+		}
+	</script>
 		
 	</body>
 </html>
