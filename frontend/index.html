@@ -342,10 +342,10 @@
 					 <div class="registration-social-login-container">
 						 <form>
 							 <div class="form-group">
-								 <input type="text" class="form-control" id="username" placeholder="Username">
+								 <input type="email" class="form-control" id="login-email" placeholder="Email" required>
 							 </div>
 							 <div class="form-group">
-								 <input type="password" class="form-control" id="password" placeholder="Password">
+								 <input type="password" class="form-control" id="login-password" placeholder="Password" required>
 							 </div>
 							 <div class="form-group">
 								 <button type="button" class="btn btn-green-pro btn-display-block" onclick = "VerifyLogin();">Sign In</button>
@@ -395,15 +395,20 @@
 
 		<script>
 			function VerifyLogin(){
-				login_email = document.getElementById('login_email').value;
-				login_password = document.getElementById('login_password').value;
+				login_email = document.getElementById('login-email').value;
+				login_password = document.getElementById('login-password').value;
+				console.log(login_email);
+				console.log(login_password);
 
 				var url = "http://localhost:3000/api/users/"+login_email+"/"+login_password;
+				console.log(url);
 
 				var data = {};
-				data.email = register_email;
-				data.password = register_password;
+				data.email = login_email;
+				data.password = login_password;
 				var json = JSON.stringify(data);
+
+
 
 				var xhr = new XMLHttpRequest();
 				xhr.open('GET', url, true);

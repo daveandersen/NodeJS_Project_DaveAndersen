@@ -14,7 +14,12 @@ app.use((req, res, next) => {
 
 
 const users = [
-    { id: 1, name: 'Dave Andersen', email: 'daveytheboo@gmail.com', password: 'HAHAHA' }
+    { id: 1, username: 'Dave Andersen', email: 'daveytheboo@gmail.com', password: 'HAHAHA' }
+];
+
+const movies = [
+    {id: 1, title: 'True Blood', rate: 'PG-13', length: 203, r_date: '2 October, 2017', director: 'James Wan'}
+
 ];
 
 
@@ -29,7 +34,6 @@ app.get('/api/users', (req, res) => {
 
 // LOGIN
 app.get('/api/users/:email/:password', (req, res) => {
-
 
     var datetime = new Date();
     console.log("\n"+datetime);
@@ -51,10 +55,11 @@ app.get('/api/users/:email/:password', (req, res) => {
     console.log('Validation success and accepted');
 
 
-    console.log('Check existing email: '+req.params.email+' and password: '+req.params.password);
-    const check_user = users.find( u => u.email === req.params.email && u.password === req.params.email );
+    //console.log('Check existing email: '+req.params.email+' and password: '+req.params.password);
+    //const check_user = users.find( u => u.email === req.params.email && u.password === req.params.email );
+    const check_user = users.find( u => u.email === req.params.email && u.password === req.params.password);
     if (!check_user) {
-        var error_message = 'Invalid login detail. Email or password is not correct.';
+        var error_message = 'Invalid login detail. Username or password is not correct.';
         console.log(error_message);
 
         var jsonRespond = {
@@ -64,6 +69,7 @@ app.get('/api/users/:email/:password', (req, res) => {
         return res.status(404).json(jsonRespond);
     }
 
+    console.log('Email ' + req.params.email + ' sucessfully login.\n');
     var jsonRespond = {
         result: user,
         message: "Login success"
@@ -120,20 +126,16 @@ app.post('/api/users', (req, res) => {
     return res.json(user);
 });
 
-// UPDATE EMAIL
-app.put('/api/users/:id', (req, res) => {
-    const {error} = validateRegister(req.body);
-    if (error) {
-        return res.status(400).send(error.details[0].message);
-    }
+//Delete User
+app.delete('/api/users/:id', (req, res) => {
     const user = users.find( u => u.id === parseInt(req.params.id) );
     if (!user) return res.status(404).send('ID not found.');
 
-    user.name = req.body.name;
-    user.email = req.body.email;
-    user.password = req.body.password;
+    const index = users.indexOf(user);
+    users.splice(index, 1);
     return res.json(user);
 });
+
 
 // Movies.html
 app.get("/api/movies", (req, res) => {
@@ -181,11 +183,8 @@ app.delete('/api/movies/:id', (req, res) => {
     return res.json(movie);
 });
 
-//Movie
-const movies = [
-    {id: 1, title: 'True Blood', rate: 'PG-13', length: 203, r_date: '2 October, 2017', director: 'James Wan'}
 
-]
+
 
 // Movie-profile.html
 app.get("/api/movie-profile", (req, res) => {
@@ -221,7 +220,7 @@ app.put('/api/movie-profile/:id', (req, res) => {
     if (error) {
         return res.status(400).send(error.details[0].message);
     }
-    const movie = movies.find( c => c.id === parseInt(req.params.id) );
+    const movie = movies.find( m => m.id === parseInt(req.params.id) );
     if (!movie) return res.status(404).send('ID not found.');
 
     movie.title = req.body.title;
@@ -257,6 +256,7 @@ app.listen(port, () => {
 function validateLogin(user){
     const schema = Joi.object({
         email:  Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
+        //username: Joi.string().min(3).required(),
         password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
     })
 
@@ -265,7 +265,7 @@ function validateLogin(user){
 
 function validateRegister(user) {
     const schema = Joi.object({
-        name: Joi.string().min(5).max(50).required(),
+        username: Joi.string().min(3).required(),
         email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
         password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
     });
