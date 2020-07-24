@@ -126,6 +126,13 @@ app.post('/api/users', (req, res) => {
     return res.json(user);
 });
 
+//Get Specific User
+app.get('/api/users/:id', (req, res) => {
+    const user = users.find( u => u.id === parseInt(req.params.id) );
+    if (!user) return res.status(404).send('ID not found.');
+    return res.json(user);
+})
+
 //Delete User
 app.delete('/api/users/:id', (req, res) => {
     const user = users.find( u => u.id === parseInt(req.params.id) );
