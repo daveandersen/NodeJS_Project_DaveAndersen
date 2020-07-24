@@ -467,9 +467,9 @@ single New Yorkers.</p>
 			<div class="clearfix"></div>
 			
 			<div class="dashboard-container">
-				
-				<h4 class="heading-extra-margin-bottom">Drama</h4>
-				<div class="row">
+				<h4 class="heading-extra-margin-bottom">Movies</h4><br><br>
+				<div class="row" id="result">
+
 					<div class="col-12 col-md-6 col-lg-4 col-xl-3">
 						<div class="item-listing-container-skrn">
 							<a href="dashboard-movie-profile.html"><img src="images/demo/listing-1.jpg" alt="Listing"></a>
@@ -771,16 +771,37 @@ single New Yorkers.</p>
 		<script src="js/script-dashboard.js" defer></script><!-- Custom Document Ready for Dashboard Only JS -->
 
 		<script>
+			getAllContent();
 			function getAllContent(){
 				var url  = "http://localhost:3000/api/movies";
 				var xhr  = new XMLHttpRequest();
-				var content = "<tr><th>ID</th><th>Movie Name</th></tr>";
+				var content = "";
 				xhr.open('GET', url, true);
 				xhr.onload = function() {
 					var courses = JSON.parse(xhr.responseText);
 					if (xhr.readyState == 4 && xhr.status == "200") {
 						courses.forEach((val) => {
-							content += "<tr><td>" + val.id + "</td><td>" + val.name + "</td></tr>";
+							content += "<div class=\"col-12 col-md-6 col-lg-4 col-xl-3\">\n" +
+									"\t\t\t\t\t\t<div class=\"item-listing-container-skrn\">\n" +
+									"\t\t\t\t\t\t\t<a href=\"dashboard-movie-profile.html\"><img src=\"images/demo/listing-1.jpg\" alt=\"Listing\"></a>\n" +
+									"\t\t\t\t\t\t\t<div class=\"item-listing-text-skrn\">\n" +
+									"\t\t\t\t\t\t\t\t<div class=\"item-listing-text-skrn-vertical-align\"><h6><a href=\"dashboard-movie-profile.html\">"+val.title+"</a></h6>\n" +
+									"\t\t\t\t\t\t\t      <div\n" +
+									"\t\t\t\t\t\t\t        class=\"circle-rating-pro\"\n" +
+									"\t\t\t\t\t\t\t        data-value=\"0.86\"\n" +
+									"\t\t\t\t\t\t\t        data-animation-start-value=\"0.86\"\n" +
+									"\t\t\t\t\t\t\t        data-size=\"32\"\n" +
+									"\t\t\t\t\t\t\t        data-thickness=\"3\"\n" +
+									"\t\t\t\t\t\t\t        data-fill=\"{\n" +
+									"\t\t\t\t\t\t\t          &quot;color&quot;: &quot;#42b740&quot;\n" +
+									"\t\t\t\t\t\t\t        }\"\n" +
+									"\t\t\t\t\t\t\t        data-empty-fill=\"#def6de\"\n" +
+									"\t\t\t\t\t\t\t        data-reverse=\"true\"\n" +
+									"\t\t\t\t\t\t\t      ><span style=\"color:#42b740;\">8.6</span></div>\n" +
+									"\t\t\t\t\t\t\t\t</div><!-- close .item-listing-text-skrn-vertical-align -->\n" +
+									"\t\t\t\t\t\t\t</div><!-- close .item-listing-text-skrn -->\n" +
+									"\t\t\t\t\t\t</div><!-- close .item-listing-container-skrn -->\n" +
+									"\t\t\t\t\t</div><!-- close .col -->";;
 						})
 						document.getElementById('result').innerHTML = content;
 					} else {

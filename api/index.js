@@ -32,53 +32,7 @@ app.get('/api/users', (req, res) => {
 
 });
 
-// LOGIN
-app.get('/api/users/:email/:password', (req, res) => {
 
-    var datetime = new Date();
-    console.log("\n"+datetime);
-    console.log("Incoming new GET HTTP request for LOGIN");
-    console.log(req.body);
-
-    // VALIDATE
-    const {error} = validateLogin(req.params);
-    if (error) {
-        console.log('Validation error');
-
-        var jsonRespond = {
-            result: "",
-            message: error.details[0].message
-        }
-
-        return res.status(400).json(jsonRespond);
-    }
-    console.log('Validation success and accepted');
-
-
-    //console.log('Check existing email: '+req.params.email+' and password: '+req.params.password);
-    //const check_user = users.find( u => u.email === req.params.email && u.password === req.params.email );
-    const check_user = users.find( u => u.email === req.params.email && u.password === req.params.password);
-    if (!check_user) {
-        var error_message = 'Invalid login detail. Username or password is not correct.';
-        console.log(error_message);
-
-        var jsonRespond = {
-            result: "",
-            message: error_message
-        }
-        return res.status(404).json(jsonRespond);
-    }
-
-    console.log('Email ' + req.params.email + ' sucessfully login.\n');
-    var jsonRespond = {
-        result: user,
-        message: "Login success"
-    }
-    return res.json(jsonRespond);
-
-
-
-});
 
 // Register
 app.post('/api/users', (req, res) => {
@@ -126,6 +80,50 @@ app.post('/api/users', (req, res) => {
     return res.json(user);
 });
 
+// LOGIN
+app.get('/api/users/:email/:password', (req, res) => {
+
+    var datetime = new Date();
+    console.log("\n"+datetime);
+    console.log("Incoming new GET HTTP request for LOGIN");
+    console.log(req.body);
+
+    // VALIDATE
+    const {error} = validateLogin(req.params);
+    if (error) {
+        console.log('Validation error');
+
+        var jsonRespond = {
+            result: "",
+            message: error.details[0].message
+        }
+
+        return res.status(400).json(jsonRespond);
+    }
+
+
+    console.log('Check existing email: '+req.params.email+' and password: '+req.params.password);
+    //const check_user = users.find( u => u.email === req.params.email && u.password === req.params.email );
+    const check_user = users.find( u => u.email === req.params.email && u.password === req.params.password);
+    if (!check_user) {
+        var error_message = 'Invalid login detail. Email or password is not correct.';
+        console.log(error_message);
+
+        var jsonRespond = {
+            result: "",
+            message: error_message
+        }
+        return res.status(404).json(jsonRespond);
+    }
+
+    console.log('Email ' + req.params.email + ' sucessfully login.\n');
+    var jsonRespond = {
+        //result: user,
+        message: "Login success"
+    }
+    return res.json(jsonRespond);
+});
+
 //Get Specific User
 app.get('/api/users/:id', (req, res) => {
     const user = users.find( u => u.id === parseInt(req.params.id) );
@@ -143,7 +141,7 @@ app.delete('/api/users/:id', (req, res) => {
     return res.json(user);
 });
 
-
+/*
 // Movies.html
 app.get("/api/movies", (req, res) => {
     return res.json(movies);
@@ -156,7 +154,7 @@ app.get('/api/movies/:id', (req, res) => {
 })
 
 app.post('/api/movies', (req, res) => {
-    const {error} = validateMovie(req.body);
+    const {error} = validateMovieProfile(req.body);
     if (error) {
         return res.status(400).send(error.details[0].message);
     }
@@ -191,21 +189,23 @@ app.delete('/api/movies/:id', (req, res) => {
 });
 
 
+ */
+
 
 
 // Movie-profile.html
-app.get("/api/movie-profile", (req, res) => {
+app.get("/api/movies", (req, res) => {
     return res.json(movies);
 });
 
-app.get('/api/movie-profile/:id', (req, res) => {
+app.get('/api/movies/:id', (req, res) => {
     const movie = movies.find( m => m.id === parseInt(req.params.id) );
     if (!movie) return res.status(404).send('ID not found.');
     return res.json(movie);
 })
 
-app.post('/api/movie-profile', (req, res) => {
-    const {error} = validateMovieProfile(req.body);
+app.post('/api/movies', (req, res) => {
+    const {error} = validateMovie(req.body);
     if (error) {
         return res.status(400).send(error.details[0].message);
     }
@@ -222,8 +222,8 @@ app.post('/api/movie-profile', (req, res) => {
     return res.json(movie);
 });
 
-app.put('/api/movie-profile/:id', (req, res) => {
-    const {error} = validateMovieProfile(req.body);
+app.put('/api/movies/:id', (req, res) => {
+    const {error} = validateMovie(req.body);
     if (error) {
         return res.status(400).send(error.details[0].message);
     }
@@ -239,7 +239,7 @@ app.put('/api/movie-profile/:id', (req, res) => {
     return res.json(movie);
 });
 
-app.delete('/api/movie-profile/:id', (req, res) => {
+app.delete('/api/movies/:id', (req, res) => {
     const movie = movies.find( m => m.id === parseInt(req.params.id) );
     if (!movie) return res.status(404).send('ID not found.');
 
@@ -279,7 +279,7 @@ function validateRegister(user) {
 
     return schema.validate(user);
 }
-
+/*
 function validateMovie(movie) {
     const schema = Joi.object({
         title: Joi.string().min(3).required(),
@@ -288,7 +288,9 @@ function validateMovie(movie) {
     return schema.validate(movie);
 }
 
-function validateMovieProfile(movie) {
+ */
+
+function validateMovie(movie) {
     const schema = Joi.object({
         title: Joi.string().required(),
         rate: Joi.string().valid('G', 'PG', 'PG-13', 'R', 'NC-17'),
