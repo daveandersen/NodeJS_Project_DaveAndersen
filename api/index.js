@@ -18,7 +18,7 @@ const users = [
 ];
 
 const movies = [
-    {id: 1, title: 'True Blood', rate: 'PG-13', length: 203, r_date: '2 October, 2017', director: 'James Wan'}
+    {id: 1, title: 'True Blood', rating: '0.86', length: 203, r_date: '2 October, 2017', director: 'James Wan'}
 
 ];
 
@@ -213,7 +213,8 @@ app.post('/api/movies', (req, res) => {
     const movie = {
         id: movies.length + 1,
         title: req.body.title,
-        rate: req.body.rate,
+        //rate: req.body.rate,
+        rating: req.body.rating,
         length: req.body.length + ' minutes',
         r_date: req.body.r_date,
         director: req.body.director
@@ -231,7 +232,8 @@ app.put('/api/movies/:id', (req, res) => {
     if (!movie) return res.status(404).send('ID not found.');
 
     movie.title = req.body.title;
-    movie.rate = req.body.rate;
+    //movie.rate = req.body.rate;
+    movie.rating = req.body.rating;
     movie.length = req.body.length + ' minutes';
     movie.r_date = req.body.r_date;
     movie.director = req.body.director;
@@ -293,7 +295,8 @@ function validateMovie(movie) {
 function validateMovie(movie) {
     const schema = Joi.object({
         title: Joi.string().required(),
-        rate: Joi.string().valid('G', 'PG', 'PG-13', 'R', 'NC-17'),
+        //rate: Joi.string().valid('G', 'PG', 'PG-13', 'R', 'NC-17'),
+        rating: Joi.string().required(),
         length: Joi.number().integer().min(2).required(),
         r_date: Joi.date().required(),
         director: Joi.string().min(3).required()

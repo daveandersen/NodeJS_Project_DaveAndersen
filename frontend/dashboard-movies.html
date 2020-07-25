@@ -469,7 +469,6 @@ single New Yorkers.</p>
 			<div class="dashboard-container">
 				<h4 class="heading-extra-margin-bottom">Movies</h4><br><br>
 				<div class="row" id="result">
-
 					<div class="col-12 col-md-6 col-lg-4 col-xl-3">
 						<div class="item-listing-container-skrn">
 							<a href="dashboard-movie-profile.html"><img src="images/demo/listing-1.jpg" alt="Listing"></a>
@@ -491,7 +490,7 @@ single New Yorkers.</p>
 							</div><!-- close .item-listing-text-skrn -->
 						</div><!-- close .item-listing-container-skrn -->
 					</div><!-- close .col -->
-					
+
 					<div class="col-12 col-md-6 col-lg-4 col-xl-3">
 						<div class="item-listing-container-skrn">
 							<a href="dashboard-movie-profile.html"><img src="images/demo/listing-2.jpg" alt="Listing"></a>
@@ -513,8 +512,8 @@ single New Yorkers.</p>
 							</div><!-- close .item-listing-text-skrn -->
 						</div><!-- close .item-listing-container-skrn -->
 					</div><!-- close .col -->
-					
-					
+
+
 					<div class="col-12 col-md-6 col-lg-4 col-xl-3">
 						<div class="item-listing-container-skrn">
 							<a href="dashboard-movie-profile.html"><img src="images/demo/listing-3.jpg" alt="Listing"></a>
@@ -536,7 +535,7 @@ single New Yorkers.</p>
 							</div><!-- close .item-listing-text-skrn -->
 						</div><!-- close .item-listing-container-skrn -->
 					</div><!-- close .col -->
-					
+
 					<div class="col-12 col-md-6 col-lg-4 col-xl-3">
 						<div class="item-listing-container-skrn">
 							<a href="dashboard-movie-profile.html"><img src="images/demo/listing-4.jpg" alt="Listing"></a>
@@ -558,8 +557,8 @@ single New Yorkers.</p>
 							</div><!-- close .item-listing-text-skrn -->
 						</div><!-- close .item-listing-container-skrn -->
 					</div><!-- close .col -->
-					
-					
+
+
 					<div class="col-12 col-md-6 col-lg-4 col-xl-3">
 						<div class="item-listing-container-skrn">
 							<a href="dashboard-movie-profile.html"><img src="images/demo/listing-5.jpg" alt="Listing"></a>
@@ -581,7 +580,7 @@ single New Yorkers.</p>
 							</div><!-- close .item-listing-text-skrn -->
 						</div><!-- close .item-listing-container-skrn -->
 					</div><!-- close .col -->
-					
+
 					<div class="col-12 col-md-6 col-lg-4 col-xl-3">
 						<div class="item-listing-container-skrn">
 							<a href="dashboard-movie-profile.html"><img src="images/demo/listing-6.jpg" alt="Listing"></a>
@@ -603,8 +602,8 @@ single New Yorkers.</p>
 							</div><!-- close .item-listing-text-skrn -->
 						</div><!-- close .item-listing-container-skrn -->
 					</div><!-- close .col -->
-					
-					
+
+
 					<div class="col-12 col-md-6 col-lg-4 col-xl-3">
 						<div class="item-listing-container-skrn">
 							<a href="dashboard-movie-profile.html"><img src="images/demo/listing-7.jpg" alt="Listing"></a>
@@ -626,7 +625,7 @@ single New Yorkers.</p>
 							</div><!-- close .item-listing-text-skrn -->
 						</div><!-- close .item-listing-container-skrn -->
 					</div><!-- close .col -->
-					
+
 					<div class="col-12 col-md-6 col-lg-4 col-xl-3">
 						<div class="item-listing-container-skrn">
 							<a href="dashboard-movie-profile.html"><img src="images/demo/listing-8.jpg" alt="Listing"></a>
@@ -648,7 +647,7 @@ single New Yorkers.</p>
 							</div><!-- close .item-listing-text-skrn -->
 						</div><!-- close .item-listing-container-skrn -->
 					</div><!-- close .col -->
-					
+
 					<div class="col-12 col-md-6 col-lg-4 col-xl-3">
 						<div class="item-listing-container-skrn">
 							<a href="dashboard-movie-profile.html"><img src="images/demo/listing-9.jpg" alt="Listing"></a>
@@ -670,7 +669,7 @@ single New Yorkers.</p>
 							</div><!-- close .item-listing-text-skrn -->
 						</div><!-- close .item-listing-container-skrn -->
 					</div><!-- close .col -->
-					
+
 					<div class="col-12 col-md-6 col-lg-4 col-xl-3">
 						<div class="item-listing-container-skrn">
 							<a href="dashboard-movie-profile.html"><img src="images/demo/listing-10.jpg" alt="Listing"></a>
@@ -692,8 +691,8 @@ single New Yorkers.</p>
 							</div><!-- close .item-listing-text-skrn -->
 						</div><!-- close .item-listing-container-skrn -->
 					</div><!-- close .col -->
-					
-					
+
+
 					<div class="col-12 col-md-6 col-lg-4 col-xl-3">
 						<div class="item-listing-container-skrn">
 							<a href="dashboard-movie-profile.html"><img src="images/demo/listing-11.jpg" alt="Listing"></a>
@@ -715,7 +714,7 @@ single New Yorkers.</p>
 							</div><!-- close .item-listing-text-skrn -->
 						</div><!-- close .item-listing-container-skrn -->
 					</div><!-- close .col -->
-					
+
 					<div class="col-12 col-md-6 col-lg-4 col-xl-3">
 						<div class="item-listing-container-skrn">
 							<a href="dashboard-movie-profile.html"><img src="images/demo/listing-12.jpg" alt="Listing"></a>
@@ -776,12 +775,14 @@ single New Yorkers.</p>
 				var url  = "http://localhost:3000/api/movies";
 				var xhr  = new XMLHttpRequest();
 				var content = "";
+
 				xhr.open('GET', url, true);
 				xhr.onload = function() {
-					var courses = JSON.parse(xhr.responseText);
+					var movies = JSON.parse(xhr.responseText);
 					if (xhr.readyState == 4 && xhr.status == "200") {
-						courses.forEach((val) => {
-							content += "<div class=\"col-12 col-md-6 col-lg-4 col-xl-3\">\n" +
+						movies.forEach((val) => {
+							content +=
+									"<div class=\"col-12 col-md-6 col-lg-4 col-xl-3\">\n" +
 									"\t\t\t\t\t\t<div class=\"item-listing-container-skrn\">\n" +
 									"\t\t\t\t\t\t\t<a href=\"dashboard-movie-profile.html\"><img src=\"images/demo/listing-1.jpg\" alt=\"Listing\"></a>\n" +
 									"\t\t\t\t\t\t\t<div class=\"item-listing-text-skrn\">\n" +
@@ -797,15 +798,16 @@ single New Yorkers.</p>
 									"\t\t\t\t\t\t\t        }\"\n" +
 									"\t\t\t\t\t\t\t        data-empty-fill=\"#def6de\"\n" +
 									"\t\t\t\t\t\t\t        data-reverse=\"true\"\n" +
-									"\t\t\t\t\t\t\t      ><span style=\"color:#42b740;\">8.6</span></div>\n" +
+									"\t\t\t\t\t\t\t      ><span style=\"color:#42b740;\">" + val.rating + "</span></div>\n" +
 									"\t\t\t\t\t\t\t\t</div><!-- close .item-listing-text-skrn-vertical-align -->\n" +
 									"\t\t\t\t\t\t\t</div><!-- close .item-listing-text-skrn -->\n" +
 									"\t\t\t\t\t\t</div><!-- close .item-listing-container-skrn -->\n" +
-									"\t\t\t\t\t</div><!-- close .col -->";;
+									"\t\t\t\t\t</div><!-- close .col -->";
+
 						})
 						document.getElementById('result').innerHTML = content;
 					} else {
-						console.error(courses);
+						console.error(movies);
 					}
 				}
 				xhr.send(null);
