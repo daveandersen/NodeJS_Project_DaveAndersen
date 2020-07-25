@@ -141,59 +141,8 @@ app.delete('/api/users/:id', (req, res) => {
     return res.json(user);
 });
 
-/*
-// Movies.html
-app.get("/api/movies", (req, res) => {
-    return res.json(movies);
-});
 
-app.get('/api/movies/:id', (req, res) => {
-    const movie = movies.find( m => m.id === parseInt(req.params.id) );
-    if (!movie) return res.status(404).send('ID not found.');
-    return res.json(movie);
-})
-
-app.post('/api/movies', (req, res) => {
-    const {error} = validateMovieProfile(req.body);
-    if (error) {
-        return res.status(400).send(error.details[0].message);
-    }
-
-    const movie = {
-        id: movies.length + 1,
-        title: req.body.title,
-    };
-    movies.push(movie);
-    return res.json(movie);
-});
-
-app.put('/api/movies/:id', (req, res) => {
-    const {error} = validateMovie(req.body);
-    if (error) {
-        return res.status(400).send(error.details[0].message);
-    }
-    const movie = movies.find( c => c.id === parseInt(req.params.id) );
-    if (!movie) return res.status(404).send('ID not found.');
-
-    movie.title = req.body.title;
-    return res.json(movie);
-});
-
-app.delete('/api/movies/:id', (req, res) => {
-    const movie = movies.find( m => m.id === parseInt(req.params.id) );
-    if (!movie) return res.status(404).send('ID not found.');
-
-    const index = movies.indexOf(movie);
-    movies.splice(index, 1);
-    return res.json(movie);
-});
-
-
- */
-
-
-
-// Movie-profile.html
+// Movie
 app.get("/api/movies", (req, res) => {
     return res.json(movies);
 });
@@ -232,7 +181,6 @@ app.put('/api/movies/:id', (req, res) => {
     if (!movie) return res.status(404).send('ID not found.');
 
     movie.title = req.body.title;
-    //movie.rate = req.body.rate;
     movie.rating = req.body.rating;
     movie.length = req.body.length + ' minutes';
     movie.r_date = req.body.r_date;

@@ -284,7 +284,6 @@
 			</div><!-- close .content-sidebar-section -->
 
 			
-			
 			<div class="content-sidebar-section">
 				<h2 class="content-sidebar-sub-header adjusted-recent-reviews">Recent Reviews</h2>
 				<ul id="sidebar-reviews-pro">
@@ -629,9 +628,14 @@ Thor</a></h6>
 		<script>
 			movieProfile();
 			function movieProfile() {
-				var url  = "http://localhost:3000/api/movies/" + req.body.movieID;
+
+				const urlParams = new URLSearchParams(window.location.search);
+				const myParam = urlParams.get('id');
+
+				var url  = "http://localhost:3000/api/movies/" + myParam;
 				var xhr  = new XMLHttpRequest();
 				var content = "";
+				var content1 = "";
 				xhr.open('GET', url, true);
 				xhr.onload = function() {
 					var movie = JSON.parse(xhr.responseText);
@@ -660,8 +664,143 @@ Thor</a></h6>
 								"\t\t\t<div class=\"content-sidebar-section\">\n" +
 								"\t\t\t\t<h4 class=\"content-sidebar-sub-header\">Director</h4>\n" +
 								"\t\t\t\t<div class=\"content-sidebar-short-description\">" + movie.director + "</div>\n" +
-								"\t\t\t</div><!-- close .content-sidebar-section -->";
-						document.getElementById('result').innerHTML = content;
+								"\t\t\t</div><!-- close .content-sidebar-section --> " +
+								"<div class=\"content-sidebar-section\">\n" +
+								"\t\t\t\t<h2 class=\"content-sidebar-sub-header adjusted-recent-reviews\">Recent Reviews</h2>\n" +
+								"\t\t\t\t<ul id=\"sidebar-reviews-pro\">\n" +
+								"\t\t\t\t\t<li>\n" +
+								"\t\t\t\t      <div\n" +
+								"\t\t\t\t        class=\"circle-rating-pro\"\n" +
+								"\t\t\t\t        data-value=\"0.86\"\n" +
+								"\t\t\t\t        data-animation-start-value=\"0.86\"\n" +
+								"\t\t\t\t        data-size=\"32\"\n" +
+								"\t\t\t\t        data-thickness=\"3\"\n" +
+								"\t\t\t\t        data-fill=\"{\n" +
+								"\t\t\t\t          &quot;color&quot;: &quot;#42b740&quot;\n" +
+								"\t\t\t\t        }\"\n" +
+								"\t\t\t\t        data-empty-fill=\"#def6de\"\n" +
+								"\t\t\t\t        data-reverse=\"true\"\n" +
+								"\t\t\t\t      ><span style=\"color:#42b740;\">8.6</span></div>\n" +
+								"\t\t\t\t\t\t<h6>Dan Cederholm</h6>\n" +
+								"\t\t\t\t\t\t<div class=\"sidebar-review-time\">October 22, 2017</div>\n" +
+								"\t\t\t\t\t\t<div class=\"spoiler-review\">Contains Spoiler</div>\n" +
+								"\t\t\t\t\t\t<p>They don't make many Sci-Fi films these days. This was a pleasant surprise all throughout the film. I really like this film.</p>\n" +
+								"\t\t\t\t\t</li>\n" +
+								"\t\t\t\t\t<li>\n" +
+								"\t\t\t\t      <div\n" +
+								"\t\t\t\t        class=\"circle-rating-pro\"\n" +
+								"\t\t\t\t        data-value=\"0.53\"\n" +
+								"\t\t\t\t        data-animation-start-value=\"0.53\"\n" +
+								"\t\t\t\t        data-size=\"32\"\n" +
+								"\t\t\t\t        data-thickness=\"3\"\n" +
+								"\t\t\t\t        data-fill=\"{\n" +
+								"\t\t\t\t          &quot;color&quot;: &quot;#ff4141&quot;\n" +
+								"\t\t\t\t        }\"\n" +
+								"\t\t\t\t        data-empty-fill=\"#ffe1e1\"\n" +
+								"\t\t\t\t        data-reverse=\"true\"\n" +
+								"\t\t\t\t      ><span style=\"color:#ff4141;\">5.3</span></div>\n" +
+								"\t\t\t\t\t\t<h6>Jeff Seid</h6>\n" +
+								"\t\t\t\t\t\t<div class=\"sidebar-review-time\">October 18, 2017</div>\n" +
+								"\t\t\t\t\t\t<p>Coming out of the theatres following my viewing of this film, I was confused. I couldn't decide whether I liked it or not.</p>\n" +
+								"\t\t\t\t\t</li>\n" +
+								"\t\t\t\t\t<li>\n" +
+								"\t\t\t\t      <div\n" +
+								"\t\t\t\t        class=\"circle-rating-pro\"\n" +
+								"\t\t\t\t        data-value=\"0.72\"\n" +
+								"\t\t\t\t        data-animation-start-value=\"0.72\"\n" +
+								"\t\t\t\t        data-size=\"32\"\n" +
+								"\t\t\t\t        data-thickness=\"3\"\n" +
+								"\t\t\t\t        data-fill=\"{\n" +
+								"\t\t\t\t          &quot;color&quot;: &quot;#42b740&quot;\n" +
+								"\t\t\t\t        }\"\n" +
+								"\t\t\t\t        data-empty-fill=\"#def6de\"\n" +
+								"\t\t\t\t        data-reverse=\"true\"\n" +
+								"\t\t\t\t      ><span style=\"color:#42b740;\">7.2</span></div>\n" +
+								"\t\t\t\t\t\t<h6>Christian De Guzman</h6>\n" +
+								"\t\t\t\t\t\t<div class=\"sidebar-review-time\">August 26, 2017</div>\n" +
+								"\t\t\t\t\t\t<div class=\"spoiler-review\">Contains Spoiler</div>\n" +
+								"\t\t\t\t\t\t<p>I have been a cinema lover for years, read a lot of reviews on SKRN and everywhere, and never found the right movie to write my first review. I always thought I would wait for the movie.</p>\n" +
+								"\t\t\t\t\t\t<p>And this is it!</p>\n" +
+								"\t\t\t\t\t</li>\n" +
+								"\t\t\t\t\t<li>\n" +
+								"\t\t\t\t      <div\n" +
+								"\t\t\t\t        class=\"circle-rating-pro\"\n" +
+								"\t\t\t\t        data-value=\"0.9\"\n" +
+								"\t\t\t\t        data-animation-start-value=\"0.9\"\n" +
+								"\t\t\t\t        data-size=\"32\"\n" +
+								"\t\t\t\t        data-thickness=\"3\"\n" +
+								"\t\t\t\t        data-fill=\"{\n" +
+								"\t\t\t\t          &quot;color&quot;: &quot;#42b740&quot;\n" +
+								"\t\t\t\t        }\"\n" +
+								"\t\t\t\t        data-empty-fill=\"#def6de\"\n" +
+								"\t\t\t\t        data-reverse=\"true\"\n" +
+								"\t\t\t\t      ><span style=\"color:#42b740;\">9.0</span></div>\n" +
+								"\t\t\t\t\t\t<h6>Jennifer Thomas</h6>\n" +
+								"\t\t\t\t\t\t<div class=\"sidebar-review-time\">August 15, 2017</div>\n" +
+								"\t\t\t\t\t\t<p>'Oblivion’ was incredible. The visuals, the score, the acting, were all amazing. The plot is definitely one of the most original I've seen in a while</p>\n" +
+								"\t\t\t\t\t</li>\n" +
+								"\t\t\t\t</ul>\n" +
+								"\t\t\t\t<a href=\"#!\" class=\"btn btn-green-pro btn-sm\">See All Reviews</a>";
+
+						content1 += "<div class=\"dashboard-container\">\n" +
+								"\t\t\t\t\t<div class=\"row\">\n" +
+								"\t\t\t\t\t\t<div class=\"col-sm\">\n" +
+								"\t\t\t\t\t\t\t<h5>Rate True Blood</h5>\n" +
+								"\t\t\t\t\t\t\t\n" +
+								"\t\t\t\t\t\t\t<div class=\"rating-pro\">\n" +
+								"   \t\t\t\t\t\t\t  <label>\n" +
+								"   \t\t\t\t\t\t\t    <input type=\"radio\" name=\"rating-pro\" value=\"10\" title=\"10 stars\"> 10\n" +
+								"   \t\t\t\t\t\t\t  </label>\n" +
+								"  \t\t\t\t\t\t\t  <label>\n" +
+								"  \t\t\t\t\t\t\t    <input type=\"radio\" name=\"rating-pro\" value=\"9\" title=\"9 stars\"> 9\n" +
+								"  \t\t\t\t\t\t\t  </label>\n" +
+								"  \t\t\t\t\t\t\t  <label>\n" +
+								"  \t\t\t\t\t\t\t    <input type=\"radio\" name=\"rating-pro\" value=\"8\" title=\"8 stars\"> 8\n" +
+								"  \t\t\t\t\t\t\t  </label>\n" +
+								"  \t\t\t\t\t\t\t  <label>\n" +
+								"  \t\t\t\t\t\t\t    <input type=\"radio\" name=\"rating-pro\" value=\"7\" title=\"7 stars\"> 7\n" +
+								"  \t\t\t\t\t\t\t  </label>\n" +
+								" \t\t\t\t\t\t\t  <label>\n" +
+								" \t\t\t\t\t\t\t    <input type=\"radio\" name=\"rating-pro\" value=\"6\" title=\"6 stars\"> 6\n" +
+								" \t\t\t\t\t\t\t  </label>\n" +
+								"\t\t\t\t\t\t\t  <label>\n" +
+								"\t\t\t\t\t\t\t    <input type=\"radio\" name=\"rating-pro\" value=\"5\" title=\"5 stars\"> 5\n" +
+								"\t\t\t\t\t\t\t  </label>\n" +
+								"\t\t\t\t\t\t\t  <label>\n" +
+								"\t\t\t\t\t\t\t    <input type=\"radio\" name=\"rating-pro\" value=\"4\" title=\"4 stars\"> 4\n" +
+								"\t\t\t\t\t\t\t  </label>\n" +
+								"\t\t\t\t\t\t\t  <label>\n" +
+								"\t\t\t\t\t\t\t    <input type=\"radio\" name=\"rating-pro\" value=\"3\" title=\"3 stars\"> 3\n" +
+								"\t\t\t\t\t\t\t  </label>\n" +
+								"\t\t\t\t\t\t\t  <label>\n" +
+								"\t\t\t\t\t\t\t    <input type=\"radio\" name=\"rating-pro\" value=\"2\" title=\"2 stars\"> 2\n" +
+								"\t\t\t\t\t\t\t  </label>\n" +
+								"\t\t\t\t\t\t\t  <label>\n" +
+								"\t\t\t\t\t\t\t    <input type=\"radio\" name=\"rating-pro\" value=\"1\" title=\"1 star\"> 1\n" +
+								"\t\t\t\t\t\t\t  </label>\n" +
+								"\t\t\t\t\t\t\t</div>\n" +
+								"\t\t\t\t\t\t\t\n" +
+								"\t\t\t\t\t\t</div>\n" +
+								"\t\t\t\t\t\t<div class=\"col-sm\">\n" +
+								"\t\t\t\t\t\t\t<h6>User Rating</h6>\n" +
+								"\t\t\t\t\t      <div\n" +
+								"\t\t\t\t\t        class=\"circle-rating-pro\"\n" +
+								"\t\t\t\t\t        data-value=\"0.86\"\n" +
+								"\t\t\t\t\t        data-animation-start-value=\"0.86\"\n" +
+								"\t\t\t\t\t        data-size=\"40\"\n" +
+								"\t\t\t\t\t        data-thickness=\"3\"\n" +
+								"\t\t\t\t\t        data-fill=\"{\n" +
+								"\t\t\t\t\t          &quot;color&quot;: &quot;#42b740&quot;\n" +
+								"\t\t\t\t\t        }\"\n" +
+								"\t\t\t\t\t        data-empty-fill=\"#def6de\"\n" +
+								"\t\t\t\t\t        data-reverse=\"true\"\n" +
+								"\t\t\t\t\t      ><span style=\"color:#42b740;\">" + movie.rating + "</span></div>\n" +
+								"\t\t\t\t\t\t\t<div class=\"clearfix\"></div>\n" +
+								"\t\t\t\t\t\t</div>\n" +
+								"\t\t\t\t\t</div><!-- close .row -->\n" +
+								"\t\t\t\t</div><!-- close .dashboard-container -->"
+						document.getElementById('content-sidebar-pro').innerHTML = content;
+						document.getElementById('movie-detail-rating').innerHTML = content1;
 					} else {
 						console.error(movie);
 					}
