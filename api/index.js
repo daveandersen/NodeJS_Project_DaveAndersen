@@ -18,7 +18,8 @@ const users = [
 ];
 
 const movies = [
-    {id: 1, title: 'True Blood', rating: '0.86', length: 203, r_date: '2 October, 2017', director: 'James Wan'}
+    {id: 1, title: 'True Blood', rating: '8.6', length: 203, r_date: '2 October, 2017', director: 'James Wan'},
+    {id: 2, title: 'Avengers', rating: '9.4', length: 215, r_date: '4 February, 2018', director: 'Stephen Spielberg'}
 
 ];
 
