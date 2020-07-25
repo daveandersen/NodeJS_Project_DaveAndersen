@@ -104,7 +104,6 @@ app.get('/api/users/:email/:password', (req, res) => {
 
 
     console.log('Check existing email: '+req.params.email+' and password: '+req.params.password);
-    //const check_user = users.find( u => u.email === req.params.email && u.password === req.params.email );
     const check_user = users.find( u => u.email === req.params.email && u.password === req.params.password);
     if (!check_user) {
         var error_message = 'Invalid login detail. Email or password is not correct.';
@@ -214,7 +213,6 @@ app.listen(port, () => {
 function validateLogin(user){
     const schema = Joi.object({
         email:  Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
-        //username: Joi.string().min(3).required(),
         password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
     })
 
@@ -230,16 +228,7 @@ function validateRegister(user) {
 
     return schema.validate(user);
 }
-/*
-function validateMovie(movie) {
-    const schema = Joi.object({
-        title: Joi.string().min(3).required(),
-    });
 
-    return schema.validate(movie);
-}
-
- */
 
 function validateMovie(movie) {
     const schema = Joi.object({
